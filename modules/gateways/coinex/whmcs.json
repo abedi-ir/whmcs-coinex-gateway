@@ -1,0 +1,32 @@
+{
+    "schema": "1.0",
+    "type": "whmcs-gateways",
+    "name": "coinex-gateway-module",
+    "license": "proprietary",
+    "category": "gateway",
+    "description": {
+        "name": "Sample Third Party Payment Gateway Module",
+        "tagline": "Payment Gateway modules allow you to integrate payment solutions with the WHMCS platform.",
+        "long": "The sample files here demonstrate how we suggest a Third Party Payment Gateway module for WHMCS be structured and implemented.",
+        "features": [
+            "Provide both client and admin facing user interfaces",
+            "Utilize hook functionality within WHMCS"
+        ]
+    },
+    "logo": {
+        "filename": "logo.png"
+    },
+    "support": {
+        "homepage": "https://www.coinex.com/", 
+        "email": "support@whmcs.com", 
+        "support_url": "https://support.coinex.com/hc/en-us/requests/new",
+        "docs_url": "https://github.com/coinexcom/coinex_perpetual_api/blob/master/perpetual_http_api.md"
+    },
+    "authors": [
+        {
+            "name": "DNJ",
+            "homepage": "https:\/\/www.jeyserver.com\/"
+        }
+    ]
+}
+

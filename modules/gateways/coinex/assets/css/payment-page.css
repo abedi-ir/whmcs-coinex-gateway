@@ -1,0 +1,64 @@
+.crypto-payment-container {
+	width: 50%;
+	margin: 0 auto;
+}
+.crypto-payment-container .label {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.crypto-payment-container .ltr {
+	direction: ltr;
+	text-align: left;
+	font-family: sans-serif;
+}
+.crypto-payment-container span.ltr {
+	display: inline-block;
+}
+.crypto-payment-container h2 {
+	text-align: center;
+}
+.crypto-payment-container .crypto-payment-step {
+	display: none;
+}
+#crypto-payment-step1 {
+	overflow: hidden;
+}
+#crypto-payment-step1 .qr-code {
+	float: left;
+}
+#crypto-payment-step1 .instructions {
+	float: right;
+	width: calc(100% - 170px);
+}
+#crypto-payment-step1 .instructions .alert {
+	margin: 10px 0;
+}
+#crypto-payment-step1 input[readonly] {
+	background-color: #fff;
+}
+
+#crypto-payment-step2 {
+	overflow: hidden;
+}
+#crypto-payment-step2 .qr-code {
+	float: left;
+}
+#crypto-payment-step2 .instructions {
+	float: right;
+	width: calc(100% - 170px);
+}
+#crypto-payment-step2 .instructions .alert {
+	margin: 10px 0;
+}
+.table-transaction {
+	width: 75%;
+	margin: 20px auto;
+}
+.icon-spinner {
+	font-size: 4em;
+	text-align: center;
+}
+.icon-success {
+	font-size: 4em;
+	text-align: center;
+}

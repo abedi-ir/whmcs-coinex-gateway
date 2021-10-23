@@ -1,0 +1,31 @@
+<?php
+namespace WHMCS\Module\Gateway\Coinex\Pages;
+
+use Lang;
+
+class PaymentPage extends InvoicePage {
+
+	public function init() {
+		parent::init();
+		$this->setPageTitle('پرداخت با ' . $this->getGatewayCurrency()->code);
+		$this->setupBreadCrumb();
+
+		$payableCurrency = $this->getGatewayCurrency();
+		$transaction = (new GetTransactionPage($this->invoiceID, null))->getTransaction();
+		$transactionJson = $transaction ? $transaction->forAPI($this->getAPI()) : null;
+
+		$this->assign('invoice', $this->getInvoice());
+		$this->assign('payableAmount', $this->getPayableAmount($payableCurrency));
+		$this->assign('payableCurrency', $payableCurrency->code);
+		$this->assign('walletNetwork', $this->getGateway()->getParam("network"));
+		$this->assign('walletAddress', $this->getWalletAddress());
+		$this->assign('jsonTransaction', json_encode($transactionJson));
+		$this->setTemplate('crypto-payment');
+	}
+
+	public function setupBreadCrumb() {
+		$this->addToBreadCrumb('index.php', Lang::trans('globalsystemname'));
+		$this->addToBreadCrumb('viewinvoice.php?id=' . $this->invoiceID, 'صورتحساب #' . $this->invoiceID);
+		$this->addToBreadCrumb('crypto-payment.php?invoice=' . $this->invoiceID, 'پرداخت بارمز ارز');
+	}
+}
