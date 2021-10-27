@@ -43,7 +43,7 @@ class GetTransactionPage extends InvoicePage {
 		}
 		$transaction->refreshFromAPI($this->getAPI());
 		if ($transaction->status == Transaction::STATUS_FINISH and $transaction->approve_at === null) {
-			$this->addPaymentToWHMCS();
+			$this->addPaymentToInvoice();
 			$transaction->approve_at = Carbon::now();
 		}
 		return array(
@@ -73,14 +73,19 @@ class GetTransactionPage extends InvoicePage {
 		}
 		return $this->transaction;
 	}
-	protected function addPaymentToWHMCS() {
+	protected function addPaymentToInvoice() {
 		$transaction = $this->getTransaction();
+		$slippage = $this->getGatewaySlippageTolerance() / 100;
 		$invoiceCurrency = $this->getInvoiceCurrency();
 		$paidCurrency = Currency::query()
 			->where("code", $transaction->coin)
 			->firstOrFail();
 
+		$invoiceBalance = $this->getInvoice()->getBalanceAttribute();
 		$paidAmountInInvoiceCurrency = $transaction->amount * $paidCurrency->rate / $invoiceCurrency->rate;
+		if (abs(1 - ($paidAmountInInvoiceCurrency / $invoiceBalance)) < $slippage) {
+			$paidAmountInInvoiceCurrency = $invoiceBalance;
+		}
 
 		checkCbTransID($transaction->tx_id);
 		logTransaction("coinex", array(

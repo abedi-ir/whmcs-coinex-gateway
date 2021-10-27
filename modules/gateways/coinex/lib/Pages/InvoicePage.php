@@ -77,6 +77,10 @@ class InvoicePage extends ClientArea {
 		return $this->gatewayCurrency;
 	}
 
+	public function getGatewaySlippageTolerance(): int {
+		return intval($this->getGateway()->getParam("slippageTolerance"));
+	}
+
 	public function getAPI(): API {
 		if (!$this->api) {
 			$gateway = $this->getGateway();

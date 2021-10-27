@@ -41,6 +41,13 @@ function coinex_config()
             'Default' => 'trc20',
             'Description' => 'Enter a network here. Like trc20 or btc or eth',
         ),
+        'slippageTolerance' => array(
+            'FriendlyName' => 'Slippage Tolerance',
+            'Type' => 'text',
+            'Size' => 25,
+            'Default' => 1,
+            'Description' => 'Enter tolerance in percent. Default is 1%'
+        )
     );
 }
 
