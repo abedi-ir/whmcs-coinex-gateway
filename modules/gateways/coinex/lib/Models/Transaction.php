@@ -25,7 +25,7 @@ class Transaction extends AbstractModel {
 					return $item;
 				}
 			}
-		} while(isset($pageData['has_next']) and $pageData['has_next']);
+		} while(isset($pageData['has_next']) and $pageData['has_next'] and $page < 3);
 		return null;
 	}
 
