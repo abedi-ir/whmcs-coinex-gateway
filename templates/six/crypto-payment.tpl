@@ -10,8 +10,11 @@ var initTransaction = {$jsonTransaction};
 			<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={$walletAddress}">
 		</div>
 		<div class="instructions">
-			<p>لطفا مبلغ <span class="ltr">{$payableAmount} {$payableCurrency}</span> را به آدرس کیف پول زیر در شبکه ی <span class="label label-success ltr">{$walletNetwork}</span> ارسال بفرمایید.</p>
-
+			<p>لطفا مبلغ <span class="ltr">{$payableAmount} {$payableCurrency}</span> را به آدرس کیف پول زیر در شبکه ی <span class="label label-success ltr">{$walletNetwork}</span> ارسال بفرمایید.قیمت فوق بدون احتساب کارمزد شبکه است.</p>
+			<p>مبلغ نهایی با احتساب کارمزد شبکه : <span class="ltr">{$payableAmount+1} {$payableCurrency}</span></p>
+			{if $gatewayDiscount}
+			<p><span class="ltr label label-info">{$gatewayDiscount}%</span> تخفیف برای شما محاسبه شده است.</p>
+			{/if}
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-default btn-copy" data-target="#wallet-address" type="button"><i class="far fa-copy"></i></button>
@@ -64,6 +67,12 @@ var initTransaction = {$jsonTransaction};
 				<th>مبلغ:</th>
 				<td class="ltr transaction-amount-currency"></td>
 			</tr>
+			{if $gatewayDiscount}
+			<tr>
+				<th>تخفیف:</th>
+				<td class="ltr"><span class="ltr label label-info">{$gatewayDiscount}%</span></td>
+			</tr>
+			{/if}
 			<tr>
 				<th>زمان:</th>
 				<td class="ltr transaction-submit-at"></td>
@@ -93,6 +102,12 @@ var initTransaction = {$jsonTransaction};
 				<th>مبلغ:</th>
 				<td class="ltr transaction-amount-currency"></td>
 			</tr>
+			{if $gatewayDiscount}
+			<tr>
+				<th>تخفیف:</th>
+				<td class="ltr"><span class="ltr label label-info">{$gatewayDiscount}%</span></td>
+			</tr>
+			{/if}
 			<tr>
 				<th>زمان:</th>
 				<td class="ltr transaction-submit-at"></td>

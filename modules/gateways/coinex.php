@@ -47,6 +47,13 @@ function coinex_config()
             'Size' => 25,
             'Default' => 1,
             'Description' => 'Enter tolerance in percent. Default is 1%'
+        ),
+        'discount' => array(
+            'FriendlyName' => 'Discount',
+            'Type' => 'text',
+            'Size' => 25,
+            'Default' => 0,
+            'Description' => 'Enter discount in percent. Default is 0%'
         )
     );
 }

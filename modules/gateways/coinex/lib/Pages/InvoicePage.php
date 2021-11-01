@@ -80,6 +80,9 @@ class InvoicePage extends ClientArea {
 	public function getGatewaySlippageTolerance(): int {
 		return intval($this->getGateway()->getParam("slippageTolerance"));
 	}
+	public function getGatewayDiscount(): int {
+		return intval($this->getGateway()->getParam("discount"));
+	}
 
 	public function getAPI(): API {
 		if (!$this->api) {
@@ -113,7 +116,10 @@ class InvoicePage extends ClientArea {
 
 	public function getPayableAmount(Currency $currency): float {
 		$invoice = $this->getInvoice();
+		$discount = $this->getGatewayDiscount() / 100;
+		$amount = $invoice->getBalanceAttribute();
+		$amount *= 1 - $discount;
 		return (new Invoice\Helper())
-			->convertCurrency($invoice->getBalanceAttribute(), $currency, $invoice);
+			->convertCurrency($amount, $currency, $invoice);
 	}
 }

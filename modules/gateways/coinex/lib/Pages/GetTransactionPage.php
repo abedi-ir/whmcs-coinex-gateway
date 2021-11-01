@@ -76,6 +76,7 @@ class GetTransactionPage extends InvoicePage {
 	protected function addPaymentToInvoice() {
 		$transaction = $this->getTransaction();
 		$slippage = $this->getGatewaySlippageTolerance() / 100;
+		$discount = $this->getGatewayDiscount() / 100;
 		$invoiceCurrency = $this->getInvoiceCurrency();
 		$paidCurrency = Currency::query()
 			->where("code", $transaction->coin)
@@ -83,6 +84,7 @@ class GetTransactionPage extends InvoicePage {
 
 		$invoiceBalance = $this->getInvoice()->getBalanceAttribute();
 		$paidAmountInInvoiceCurrency = $transaction->amount * $paidCurrency->rate / $invoiceCurrency->rate;
+		$paidAmountInInvoiceCurrency *= 1 + $discount;
 		if (abs(1 - ($paidAmountInInvoiceCurrency / $invoiceBalance)) < $slippage) {
 			$paidAmountInInvoiceCurrency = $invoiceBalance;
 		}

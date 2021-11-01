@@ -20,6 +20,7 @@ class PaymentPage extends InvoicePage {
 		$this->assign('walletNetwork', $this->getGateway()->getParam("network"));
 		$this->assign('walletAddress', $this->getWalletAddress());
 		$this->assign('jsonTransaction', json_encode($transactionJson));
+		$this->assign('gatewayDiscount', $this->getGatewayDiscount());
 		$this->setTemplate('crypto-payment');
 	}
 
