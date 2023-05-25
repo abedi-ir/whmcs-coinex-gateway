@@ -10,10 +10,22 @@ var initTransaction = {$jsonTransaction};
 			<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={$walletAddress}">
 		</div>
 		<div class="instructions">
-			<p>لطفا مبلغ <span class="ltr">{$payableAmount} {$payableCurrency}</span> را به آدرس کیف پول زیر در شبکه ی <span class="label label-success ltr">{$walletNetwork}</span> ارسال بفرمایید.قیمت فوق بدون احتساب کارمزد شبکه است.</p>
-			<p>مبلغ نهایی با احتساب کارمزد شبکه : <span class="ltr">{$payableAmount+1} {$payableCurrency}</span></p>
+			<p>
+				Please send the amount of 
+				<span class="ltr">{$payableAmount} {$payableCurrency}</span> 
+				to the following wallet address in the 
+				<span class="label label-success ltr">{$walletNetwork}</span> 
+				network. The above price does not include the network fee.
+			</p>
+			<p>
+				The final amount including the network fee is : 
+				<span class="ltr">{$payableAmount+1} {$payableCurrency}</span>
+			</p>
 			{if $gatewayDiscount}
-			<p><span class="ltr label label-info">{$gatewayDiscount}%</span> تخفیف برای شما محاسبه شده است.</p>
+			<p>
+				<span class="ltr label label-info">{$gatewayDiscount}%</span> 
+				discount has been calculated.
+			</p>
 			{/if}
 			<div class="input-group">
 				<span class="input-group-btn">
@@ -23,11 +35,19 @@ var initTransaction = {$jsonTransaction};
 			</div>
 			
 		
-			<p class="alert alert-danger">لطفا توجه داشته باشید که از ولت فوق برای فقط و فقط ارز {$payableCurrency}  در شبکه ی <span class="ltr">{$walletNetwork}</span> استفاده بفرمایید، در غیراینصورت امکان
-				گم شدن توکن های ارسالی شما وجود دارد.</p>
+			<p class="alert alert-danger">
+				Please only use 
+				{$payableCurrency} 
+				currency in 
+				<span class="ltr">{$walletNetwork}</span> 
+				network. otherwise your tokens are missing.
+			</p>
 		
 			<p class="text-center">
-				<button type="submit" class="btn btn-default"> <i class="fas fa-arrow-circle-left"></i> مرحله ی بعد</button>
+				<button type="submit" class="btn btn-default">
+					<i class="fas fa-arrow-circle-left"></i> 
+					Next
+				</button>
 			</p>
 		
 		</div>
@@ -37,13 +57,21 @@ var initTransaction = {$jsonTransaction};
 			<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={$walletAddress}">
 		</div>
 		<div class="instructions">
-			<p>پس از انجام تراکنش لطفا شماره Transaction ID را وارد نمایید.</p>
+			<p>
+				Enter Transaction ID after completing the transaction.
+			</p>
 			<div class="form-group">
 				<input type="text" class="form-control ltr" name="tx_id" value="">
 			</div>
 			<p class="text-center">
-				<button type="button" class="btn btn-default btn-back"> <i class="fas fa-arrow-circle-right"></i> مرحله ی قبل</button>
-				<button type="submit" class="btn btn-success"> <i class="fas fa-arrow-circle-left"></i> مرحله ی بعد</button>
+				<button type="button" class="btn btn-default btn-back">
+					<i class="fas fa-arrow-circle-right"></i> 
+					Previous step
+				</button>
+				<button type="submit" class="btn btn-success">
+					<i class="fas fa-arrow-circle-left"></i> 
+					Next step
+				</button>
 			</p>
 		</div>
 	</form>
@@ -51,38 +79,42 @@ var initTransaction = {$jsonTransaction};
 		<div class="icon-spinner text-info">
 			<i class="fas fa-spinner fa-spin"></i>
 		</div>
-		<h3 class="text-center">صبر کنید...</h3>
-		<p>تراکنش شما انجام شده اما ما منتظر هستیم تا از شبکه تائید دریافت کنیم. معمولا این مرحله کمتر از چند دقیقه زمان خواهد
-			برد و از طرف شما اقدامی لازم نیست انجام شود.</p>
+		<h3 class="text-center">Wait ..</h3>
+		<p>
+			Your transaction has been completed, but we are waiting to receive confirmation from the network. 
+			Usually, this step will take less than a few minutes and no action is required on your part.
+		</p>
 
-		<p class="text-info"><i class="fas fa-exclamation-circle"></i> شما می‌توانید با خیال آسوده این صفحه را ترک کنید، تراکنش
-			با موفقیت در سیستم ثبت شده و هر زمان توسط شبکه تائید شود صورتحسابتان پرداخت خواهد شد.</p>
+		<p class="text-info">
+			<i class="fas fa-exclamation-circle"></i> 
+			You can leave this page from now, the transaction is successfully registered in the system and your bill will be paid whenever it is confirmed by the network.
+		</p>
 
 		<table class="table table-transaction">
 			<tr>
-				<th>شناسه:</th>
+				<th>ID:</th>
 				<td class="ltr transaction-tx"></td>
 			</tr>
 			<tr>
-				<th>مبلغ:</th>
+				<th>Amount:</th>
 				<td class="ltr transaction-amount-currency"></td>
 			</tr>
 			{if $gatewayDiscount}
 			<tr>
-				<th>تخفیف:</th>
+				<th>Discount:</th>
 				<td class="ltr"><span class="ltr label label-info">{$gatewayDiscount}%</span></td>
 			</tr>
 			{/if}
 			<tr>
-				<th>زمان:</th>
+				<th>Date:</th>
 				<td class="ltr transaction-submit-at"></td>
 			</tr>
 			<tr>
-				<th>تائیدیه ها:</th>
-				<td><span class="transaction-confrimations"></span> عدد</td>
+				<th>Confirmations:</th>
+				<td><span class="transaction-confrimations"></span></td>
 			</tr>
 			<tr>
-				<th>وضعیت:</th>
+				<th>Status:</th>
 				<td class="transaction-status"></td>
 			</tr>
 		</table>
@@ -91,38 +123,43 @@ var initTransaction = {$jsonTransaction};
 		<div class="icon-success text-success">
 			<i class="fas fa-check-square"></i>
 		</div>
-		<h3 class="text-center">موفقیت آمیز!</h3>
-		<p>پرداخت شما به مبلغ <span class="ltr transaction-amount-currency"></span> تائید شد. اکنون می‌توانید به صورتحسابتان بازگردید.</p>
+		<h3 class="text-center">Successfull!</h3>
+		<p>
+			Your payment has been confirmed in the amount of <span class="ltr transaction-amount-currency"></span>. You can now return to your transaction.
+		</p>
 		<table class="table table-transaction">
 			<tr>
-				<th>شناسه:</th>
+				<th>ID:</th>
 				<td class="ltr transaction-tx"></td>
 			</tr>
 			<tr>
-				<th>مبلغ:</th>
+				<th>Amount:</th>
 				<td class="ltr transaction-amount-currency"></td>
 			</tr>
 			{if $gatewayDiscount}
 			<tr>
-				<th>تخفیف:</th>
+				<th>Discount:</th>
 				<td class="ltr"><span class="ltr label label-info">{$gatewayDiscount}%</span></td>
 			</tr>
 			{/if}
 			<tr>
-				<th>زمان:</th>
+				<th>Date:</th>
 				<td class="ltr transaction-submit-at"></td>
 			</tr>
 			<tr>
-				<th>تائیدیه ها:</th>
-				<td><span class="transaction-confrimations"></span> عدد</td>
+				<th>Confirmations:</th>
+				<td><span class="transaction-confrimations"></span></td>
 			</tr>
 			<tr>
-				<th>وضعیت:</th>
+				<th>Status:</th>
 				<td class="transaction-status"></td>
 			</tr>
 		</table>
 		<p class="text-center">
-			<a type="submit" class="btn btn-default" href="{$invoice->getViewInvoiceUrl()}"> <i class="fas fa-arrow-circle-left"></i> مشاهده ی صورتحساب</a>
+			<a type="submit" class="btn btn-default" href="{$invoice->getViewInvoiceUrl()}">
+				<i class="fas fa-arrow-circle-left"></i> 
+				View Transaction
+			</a>
 		</p>
 	</form>
 </div>
@@ -139,7 +176,7 @@ var initTransaction = {$jsonTransaction};
 			</div>
 			<div class="modal-body panel-body"></div>
 			<div class="modal-footer panel-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">متوجه شدم</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
 			</div>
 		</div>
 	</div>

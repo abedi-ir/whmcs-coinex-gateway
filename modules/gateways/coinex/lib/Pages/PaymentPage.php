@@ -26,7 +26,7 @@ class PaymentPage extends InvoicePage {
 
 	public function setupBreadCrumb() {
 		$this->addToBreadCrumb('index.php', Lang::trans('globalsystemname'));
-		$this->addToBreadCrumb('viewinvoice.php?id=' . $this->invoiceID, 'صورتحساب #' . $this->invoiceID);
-		$this->addToBreadCrumb('crypto-payment.php?invoice=' . $this->invoiceID, 'پرداخت بارمز ارز');
+		$this->addToBreadCrumb('viewinvoice.php?id=' . $this->invoiceID, 'Transaction #' . $this->invoiceID);
+		$this->addToBreadCrumb('crypto-payment.php?invoice=' . $this->invoiceID, 'Pay with crypto currency');
 	}
 }

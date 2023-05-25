@@ -46,7 +46,7 @@ $(function () {
 		}
 		$btn.parent().find("button").prop("disabled", true);
 		$btn.data("orgHTML", $btn.html());
-		$btn.html('<i class="fas fa-spinner fa-spin"></i> صبر کنید');
+		$btn.html('Wait <i class="fas fa-spinner fa-spin"></i>');
 		var txID = $("input[name=tx_id]", this).val();
 		var urlParameters = (new URLSearchParams({
 			action: "submit-transaction",
@@ -68,16 +68,16 @@ $(function () {
 				if (!data.status) {
 					switch (data.error) {
 						case "transaction-duplicate":
-							growlError("خطا", "این تراکنش تکراری است");
+							growlError("Error", "This transaction is duplicated.");
 							break;
 						case "transaction-too-old":
-							growlError("خطا", "این تراکنش خیلی قدیمی است");
+							growlError("Error", "This transaction is too old.");
 							break;
 						case "transaction-notfound":
-							growlError("خطا", "ما هنوز این تراکنش را دریافت نکردیم!<br> لطفا ابتدا اطمینان حاصل کنید که شناسه تراکنش را به دسترسی وارد کردید.<br>اگر فکر میکنید که اشتباهی در روند ثبت تراکنش شما وجود دارد لطفا از طریق پشتیبانی آن را به ما گزارش دهید.");
+							growlError("Error", "We haven't received this transaction yet!<br> Please ensure that the Transaction ID is correct.<br>If you think there is an error, please report it to us through support.");
 							break;
 						default:
-							growlError("خطا", "کد خطا: " + data.error);
+							growlError("Error", "Error NO: " + data.error);
 							break;
 					}
 					return;
@@ -136,13 +136,13 @@ function updateTransactionTable($table, transaction) {
 function transactionStatusLabel(status) {
 	switch (status) {
 		case TRANSACTION_STATUS.PROCESSING:
-			return '<span class="label label-default">در حال پردازش</span>';
+			return '<span class="label label-default">Processing</span>';
 		case TRANSACTION_STATUS.CONFRIMING:
-			return '<span class="label label-info">منتظر تائید شبکه</span>';
+			return '<span class="label label-info">Waiting for network confirmation</span>';
 		case TRANSACTION_STATUS.CANCEL:
-			return '<span class="label label-danger">کنسل شده</span>';
+			return '<span class="label label-danger">Canceled</span>';
 		case TRANSACTION_STATUS.FINISH:
-			return '<span class="label label-success">تائید شده</span>';
+			return '<span class="label label-success">Confirmed</span>';
 	}
 	return "";
 }
