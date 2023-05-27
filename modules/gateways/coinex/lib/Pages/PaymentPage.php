@@ -7,7 +7,7 @@ class PaymentPage extends InvoicePage {
 
 	public function init() {
 		parent::init();
-		$this->setPageTitle('پرداخت با ' . $this->getGatewayCurrency()->code);
+		$this->setPageTitle('Pay by ' . $this->getGatewayCurrency()->code);
 		$this->setupBreadCrumb();
 
 		$payableCurrency = $this->getGatewayCurrency();

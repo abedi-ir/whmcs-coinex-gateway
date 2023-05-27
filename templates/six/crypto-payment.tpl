@@ -4,18 +4,18 @@ var initTransaction = {$jsonTransaction};
 <link href="{$WEB_ROOT}/modules/gateways/coinex/assets/css/payment-page.css" rel="stylesheet">
 <script src="{$WEB_ROOT}/modules/gateways/coinex/assets/js/payment-page.js"></script>
 <div class="crypto-payment-container">
-	<h2>پرداخت با {$payableCurrency}</h2>
+	<h2>Pay by {$payableCurrency}</h2>
 	<form class="crypto-payment-step" id="crypto-payment-step1">
 		<div class="qr-code">
 			<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={$walletAddress}">
 		</div>
 		<div class="instructions">
 			<p>
-				Please send the amount of 
+				Please send
 				<span class="ltr">{$payableAmount} {$payableCurrency}</span> 
-				to the following wallet address in the 
+				to the following wallet address in the
 				<span class="label label-success ltr">{$walletNetwork}</span> 
-				network. The above price does not include the network fee.
+				network. Network's fee is not included.
 			</p>
 			<p>
 				The final amount including the network fee is : 
@@ -36,17 +36,15 @@ var initTransaction = {$jsonTransaction};
 			
 		
 			<p class="alert alert-danger">
-				Please only use 
-				{$payableCurrency} 
-				currency in 
-				<span class="ltr">{$walletNetwork}</span> 
-				network. otherwise your tokens are missing.
+				The address is ONLY available for
+				<span class="ltr">{$payableCurrency}-{$walletNetwork}</span> 
+				deposit. Deposit of other assets will lead to permanent asset loss.
 			</p>
 		
 			<p class="text-center">
 				<button type="submit" class="btn btn-default">
-					<i class="fas fa-arrow-circle-left"></i> 
-					Next
+					<i class="fas fa-arrow-circle-right"></i> 
+					Next 
 				</button>
 			</p>
 		
@@ -58,19 +56,19 @@ var initTransaction = {$jsonTransaction};
 		</div>
 		<div class="instructions">
 			<p>
-				Enter Transaction ID after completing the transaction.
+				Please enter Transaction ID (TxID).
 			</p>
 			<div class="form-group">
 				<input type="text" class="form-control ltr" name="tx_id" value="">
 			</div>
 			<p class="text-center">
 				<button type="button" class="btn btn-default btn-back">
-					<i class="fas fa-arrow-circle-right"></i> 
-					Previous step
+					<i class="fas fa-arrow-circle-left"></i> 
+					Previous 
 				</button>
 				<button type="submit" class="btn btn-success">
-					<i class="fas fa-arrow-circle-left"></i> 
-					Next step
+					<i class="fas fa-arrow-circle-right"></i> 
+					Next 
 				</button>
 			</p>
 		</div>
@@ -87,7 +85,7 @@ var initTransaction = {$jsonTransaction};
 
 		<p class="text-info">
 			<i class="fas fa-exclamation-circle"></i> 
-			You can leave this page from now, the transaction is successfully registered in the system and your bill will be paid whenever it is confirmed by the network.
+			You can leave this page, the transaction is successfully saved in the system and your bill will be paid as soon as it is confirmed by the network.
 		</p>
 
 		<table class="table table-transaction">
@@ -125,7 +123,7 @@ var initTransaction = {$jsonTransaction};
 		</div>
 		<h3 class="text-center">Successfull!</h3>
 		<p>
-			Your payment has been confirmed in the amount of <span class="ltr transaction-amount-currency"></span>. You can now return to your transaction.
+			Your payment has been confirmed in the amount of <span class="ltr transaction-amount-currency"></span>. You can now return to your invoice.
 		</p>
 		<table class="table table-transaction">
 			<tr>
@@ -157,7 +155,7 @@ var initTransaction = {$jsonTransaction};
 		</table>
 		<p class="text-center">
 			<a type="submit" class="btn btn-default" href="{$invoice->getViewInvoiceUrl()}">
-				<i class="fas fa-arrow-circle-left"></i> 
+				<i class="fas fa-arrow-circle-right"></i> 
 				View Transaction
 			</a>
 		</p>
